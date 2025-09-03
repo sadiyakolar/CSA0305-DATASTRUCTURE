@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed!\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a node at the end of the linked list
+struct Node* insertNode(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        return newNode;
+    }
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    return head;
+}
+
+// Function to count the number of nodes in the linked list
+int countNodes(struct Node* head) {
+    int count = 0;
+    struct Node* temp = head;
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+// Function to print the linked list (for verification)
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    int n, data;
+    
+    // Input the number of nodes
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    
+    // Validate input
+    if (n < 0) {
+        printf("Invalid number of nodes\n");
+        return 1;
+    }
+    
+    // Input the linked list elements
+    if (n > 0) {
+        printf("Enter %d elements:\n", n);
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &data);
+            head = insertNode(head, data);
+        }
+    }
+    
+    // Print the linked list (optional, for verification)
+    printList(head);
+    
+    // Count and print the number of nodes
+    int nodeCount = countNodes(head);
+    printf("Number of nodes in the linked list: %d\n", nodeCount);
+    
+    // Free the linked list memory
+    struct Node* temp = head;
+    while (temp != NULL) {
+        struct Node* next = temp->next;
+        free(temp);
+        temp = next;
+    }
+    
+    return 0;
+}
