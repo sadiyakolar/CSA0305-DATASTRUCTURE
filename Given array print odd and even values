@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+void printOddEven(int arr[], int size) {
+    // Print even numbers
+    printf("Even numbers in the array: ");
+    int evenFound = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 2 == 0) {
+            printf("%d ", arr[i]);
+            evenFound = 1;
+        }
+    }
+    if (!evenFound) {
+        printf("None");
+    }
+    printf("\n");
+
+    // Print odd numbers
+    printf("Odd numbers in the array: ");
+    int oddFound = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 2 != 0) {
+            printf("%d ", arr[i]);
+            oddFound = 1;
+        }
+    }
+    if (!oddFound) {
+        printf("None");
+    }
+    printf("\n");
+}
+
+int main() {
+    int size;
+    
+    // Input array size
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+    
+    // Validate array size
+    if (size <= 0) {
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    // Declare array and input elements
+    int arr[size];
+    printf("Enter %d elements:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    // Call function to print odd and even numbers
+    printOddEven(arr, size);
+    
+    return 0;
+}
