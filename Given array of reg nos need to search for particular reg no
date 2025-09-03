@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+// Function to search for a registration number in the array
+int searchRegNo(int arr[], int size, int regNo) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == regNo) {
+            return i; // Return the index where regNo is found
+        }
+    }
+    return -1; // Return -1 if regNo is not found
+}
+
+int main() {
+    int size;
+    
+    // Input array size
+    printf("Enter the number of registration numbers: ");
+    scanf("%d", &size);
+    
+    // Validate array size
+    if (size <= 0) {
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    // Declare array and input registration numbers
+    int regNos[size];
+    printf("Enter %d registration numbers:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &regNos[i]);
+    }
+    
+    // Input registration number to search
+    int regNo;
+    printf("Enter the registration number to search: ");
+    scanf("%d", &regNo);
+    
+    // Search for the registration number
+    int index = searchRegNo(regNos, size, regNo);
+    
+    // Output result
+    if (index != -1) {
+        printf("Registration number %d found at index %d\n", regNo, index);
+    } else {
+        printf("Registration number %d not found in the array\n", regNo);
+    }
+    
+    return 0;
+}
