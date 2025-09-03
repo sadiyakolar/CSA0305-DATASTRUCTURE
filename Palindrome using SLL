@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a singly linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed!\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a node at the end of the linked list
+struct Node* insertNode(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        return newNode;
+    }
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    return head;
+}
+
+// Function to reverse a linked list
+struct Node* reverseList(struct Node* head) {
+    struct Node *prev = NULL, *current = head, *next = NULL;
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}
+
+// Function to check if the linked list is a palindrome
+int isPalindrome(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return 1; // Empty list or single node is a palindrome
+    }
+    
+    // Step 1: Find the middle of the list using slow and fast pointers
+    struct Node *slow = head, *fast = head, *prevSlow = NULL;
+    while (fast->next != NULL && fast->next->next != NULL) {
+        fast = fast->next->next;
+        prevSlow = slow;
+        slow = slow->next;
+    }
+    
+    // Step 2: Split the list and reverse the second half
+    struct Node* secondHalf = slow->next;
+    prevSlow->next = NULL; // Split the list
+    secondHalf = reverseList(secondHalf);
+    
+    // Step 3: Compare first half with reversed second half
+    struct Node* firstHalf = head;
+    while (secondHalf != NULL) {
+        if (firstHalf->data != secondHalf->data) {
+            return 0; // Not a palindrome
+        }
+        firstHalf = firstHalf->next;
+        secondHalf = secondHalf->next;
+    }
+    
+    return 1; // Is a palindrome
+}
+
+// Function to print the linked list (for verification)
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    int n, data;
+    
+    // Input the number of nodes
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    
+    // Validate input
+    if (n < 0) {
+        printf("Invalid number of nodes\n");
+        return 1;
+    }
+    
+    // Input the linked list elements
+    if (n > 0) {
+        printf("Enter %d elements:\n", n);
+        for (int i
