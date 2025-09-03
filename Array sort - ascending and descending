@@ -1,0 +1,71 @@
+#include <stdio.h>
+
+// Function to sort array in ascending order using Bubble Sort
+void sortAscending(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap elements
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to sort array in descending order using Bubble Sort
+void sortDescending(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                // Swap elements
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to print array
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int size;
+    
+    // Input array size
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+    
+    // Validate array size
+    if (size <= 0) {
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    // Declare array and input elements
+    int arr[size], temp[size];
+    printf("Enter %d elements:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+        temp[i] = arr[i]; // Copy array for descending sort
+    }
+    
+    // Sort and print in ascending order
+    sortAscending(arr, size);
+    printf("Array sorted in ascending order: ");
+    printArray(arr, size);
+    
+    // Sort and print in descending order
+    sortDescending(temp, size);
+    printf("Array sorted in descending order: ");
+    printArray(temp, size);
+    
+    return 0;
+}
