@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int isValidString(const char *str) {
+    if (str == NULL) {
+        return 0
+    }
+    int i = 0;
+    while (str[i] != '\0') {
+        if (!isspace((unsigned char)str[i])) {
+            return 1; // Valid (found a non-whitespace character)
+        }
+        i++;
+    }
+    return 0; // Invalid (empty or only whitespace)
+}
+
+int main() {
+    // Test cases
+    const char *test1 = "hello";
+    const char *test2 = "";
+    const char *test3 = "   ";
+    const char *test4 = NULL;
+    const char *test5 = "  hello  ";
+
+    printf("Test1: %s\n", isValidString(test1) ? "Valid" : "Invalid");
+    printf("Test2: %s\n", isValidString(test2) ? "Valid" : "Invalid");
+    printf("Test3: %s\n", isValidString(test3) ? "Valid" : "Invalid");
+    printf("Test4: %s\n", isValidString(test4) ? "Valid" : "Invalid");
+    printf("Test5: %s\n", isValidString(test5) ? "Valid" : "Invalid");
+
+    return 0;
+}
